@@ -19,11 +19,12 @@ data class ImageResponse(
     @Json(name = "imageHeight")
     val largeImageHeight: Int? = null,
     @Json(name = "imageSize")
-    val largeImageSize: Long? = null,
-    val views: Long? = null,
-    val downloads: Long? = null,
+    val largeImageSize: Int? = null,
+    val views: Int? = null,
+    val comments: Int? = null,
+    val downloads: Int? = null,
     val collections: Int? = null,
-    val likes: Long? = null,
+    val likes: Int? = null,
     @Json(name = "user")
     val userName: String? = null,
     val userImageUrl: String? = null
