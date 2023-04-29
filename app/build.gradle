@@ -40,12 +40,21 @@ android {
 }
 
 dependencies {
+    //data
     implementation project(':data:remote')
+    implementation project(':data:repository:images')
+    implementation project(':data:local:images')
+    //domain
+    implementation project(':domain:images')
+    //feature
+    implementation project(':feature:imagelist')
+
     //DI
     implementation "io.insert-koin:koin-android:3.4.0"
-
+    //UI
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

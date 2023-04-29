@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/images_list_nav_graph"
+    android:id="@+id/nav_graph">
+
+    <include app:graph="@navigation/images_list_nav_graph" />
+
+<!--    <fragment-->
+<!--        android:id="@+id/imagesDetailsFragment"-->
+<!--        android:name="com.alexnechet.pixabay.ui.feature.imagedetails.ImagesDetailsFragment"-->
+<!--        android:label="imagesDetailsFragment"-->
+<!--        tools:layout="@layout/fragment_images_list" />-->
+
+</navigation>

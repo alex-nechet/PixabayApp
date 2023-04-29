@@ -32,6 +32,8 @@ android {
 
 dependencies {
     implementation project(':data:remote')
+    implementation project(':data:local:images')
+    implementation project(':domain:images')
     //DI
     implementation "io.insert-koin:koin-core:3.4.0"
 
