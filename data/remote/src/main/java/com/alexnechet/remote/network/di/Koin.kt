@@ -1,5 +1,7 @@
-package com.alexnechet.remote.network
+package com.alexnechet.remote.network.di
 
+import com.alexnechet.remote.network.NetworkParameters
+import com.alexnechet.remote.network.PixabayApi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -17,7 +19,7 @@ private const val HEADER_AUTHORIZATION = "api"
 private const val AUTH_INTERCEPTOR = "authInterceptor"
 private const val LOGGING_INTERCEPTOR = "loggingInterceptor"
 
-fun networkModule(parameters: NetworkParameters) = module {
+internal fun networkModule(parameters: NetworkParameters) = module {
     single(named(AUTH_INTERCEPTOR)) {
         Interceptor { chain ->
             val requestBuilder = chain.request().newBuilder()

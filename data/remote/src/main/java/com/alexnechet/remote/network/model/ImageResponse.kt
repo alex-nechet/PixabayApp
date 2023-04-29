@@ -2,10 +2,10 @@ package com.alexnechet.remote.network.model
 
 import com.squareup.moshi.Json
 
-data class Image(
+data class ImageResponse(
     val id: Long,
     val pageUrl: String? = null,
-    val type: Type,
+    val type: TypeResponse,
     val tags: String? = null,
     val previewUrl: String? = null,
     val previewWidth: Int? = null,

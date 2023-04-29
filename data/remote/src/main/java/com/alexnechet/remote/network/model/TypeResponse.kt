@@ -1,5 +1,5 @@
 package com.alexnechet.remote.network.model
 
-enum class Type {
+enum class TypeResponse {
     PHOTO
 }

@@ -6,5 +6,5 @@ data class ResponseData(
     val total: Long,
     val totalHits: Long,
     @Json(name ="hits")
-    val imageList: List<Image>
+    val imageList: List<ImageResponse>
 )
