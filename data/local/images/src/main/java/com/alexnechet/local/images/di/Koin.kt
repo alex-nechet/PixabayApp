@@ -7,7 +7,7 @@ import com.alexnechet.local.images.db.ImagesDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val userLocalDataSource = module {
+val imagesLocalDataSource = module {
     single {
         Room.databaseBuilder(
             androidContext(),

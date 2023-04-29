@@ -1,4 +1,6 @@
 package com.alexnechet.domain.images.usecase
 
-class GetImagesUseCase {
+import com.alexnechet.domain.images.repository.ImagesRepository
+
+class GetImagesUseCase(private val imagesRepository: ImagesRepository) {
 }

@@ -1,23 +1,18 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.alexnechet.pixabay'
+    namespace 'com.alexnechet.feature.images'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.alexnechet.pixabay"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField 'String', 'BASE_URL', baseUrl
-        buildConfigField 'String', 'API_KEY', apiKey
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -35,20 +30,14 @@ android {
     }
 
     buildFeatures {
-        buildConfig true
+        viewBinding true
     }
 }
 
 dependencies {
-    //data
-    implementation project(':data:remote')
-    implementation project(':data:repository:images')
-    implementation project(':data:local:images')
-    //domain
     implementation project(':domain:images')
-    //feature
     implementation project(':feature:common')
-    implementation project(':feature:images')
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

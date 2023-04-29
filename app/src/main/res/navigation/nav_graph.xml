@@ -7,10 +7,4 @@
 
     <include app:graph="@navigation/images_list_nav_graph" />
 
-<!--    <fragment-->
-<!--        android:id="@+id/imagesDetailsFragment"-->
-<!--        android:name="com.alexnechet.pixabay.ui.feature.imagedetails.ImagesDetailsFragment"-->
-<!--        android:label="imagesDetailsFragment"-->
-<!--        tools:layout="@layout/fragment_images_list" />-->
-
 </navigation>
