@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-android'
 }
 
 android {
@@ -43,10 +44,11 @@ android {
 dependencies {
     //DI
     implementation "io.insert-koin:koin-android:3.4.0"
-
+    //DB
     implementation "androidx.room:room-runtime:2.5.1"
     implementation "androidx.room:room-paging:2.5.1"
-    annotationProcessor "androidx.room:room-compiler:2.5.1"
+    implementation "androidx.room:room-ktx:2.5.1"
+    kapt "androidx.room:room-compiler:2.5.1"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -3,6 +3,8 @@ package com.alexnechet.local.images.di
 import androidx.room.Room
 import com.alexnechet.local.images.ImagesLocalDataSource
 import com.alexnechet.local.images.ImagesLocalDataSourceImpl
+import com.alexnechet.local.images.RemoteKeysLocalDataSource
+import com.alexnechet.local.images.RemoteKeysLocalDataSourceImpl
 import com.alexnechet.local.images.db.ImagesDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -16,6 +18,11 @@ val imagesLocalDataSource = module {
         ).build()
     }
 
-    single { get<ImagesDatabase>().imagesDao() }
-    single<ImagesLocalDataSource> { ImagesLocalDataSourceImpl(get()) }
+    single<ImagesLocalDataSource> {
+        ImagesLocalDataSourceImpl(get<ImagesDatabase>().imagesDao())
+    }
+
+    single<RemoteKeysLocalDataSource> {
+        RemoteKeysLocalDataSourceImpl(get<ImagesDatabase>().remoteKeysDao())
+    }
 }

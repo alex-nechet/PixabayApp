@@ -6,9 +6,10 @@ import retrofit2.http.Query
 
 interface PixabayApi {
 
-    @GET
+    @GET(".")
     suspend fun getImages(
         @Query("q", encoded = true) query: String?,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query ("per_page") size : Int
     ): ResponseData
 }

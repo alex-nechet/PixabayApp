@@ -5,8 +5,10 @@ import com.alexnechet.remote.network.PixabayApi
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -15,16 +17,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 
-private const val HEADER_AUTHORIZATION = "api"
+private const val KEY = "key"
 private const val AUTH_INTERCEPTOR = "authInterceptor"
 private const val LOGGING_INTERCEPTOR = "loggingInterceptor"
 
 internal fun networkModule(parameters: NetworkParameters) = module {
     single(named(AUTH_INTERCEPTOR)) {
         Interceptor { chain ->
-            val requestBuilder = chain.request().newBuilder()
-            requestBuilder.addHeader(HEADER_AUTHORIZATION, parameters.apiKey)
-            chain.proceed(requestBuilder.build())
+            var request = chain.request()
+            val url = request.url.newBuilder().addQueryParameter(KEY, parameters.apiKey).build()
+            request = request.newBuilder().url(url).build()
+            return@Interceptor chain.proceed(request)
         }
     }
 

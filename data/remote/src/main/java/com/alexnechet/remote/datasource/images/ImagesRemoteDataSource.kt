@@ -8,15 +8,16 @@ import kotlinx.coroutines.withContext
 
 
 interface ImagesRemoteDataSource {
-    suspend operator fun invoke(query: String?, page: Int): ResponseData
+    suspend operator fun invoke(query: String?, page: Int, size: Int): ResponseData
 }
 
 class ImagesRemoteDataSourceImpl(
     private val api: PixabayApi,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ImagesRemoteDataSource {
-    override suspend operator fun invoke(query: String?, page: Int): ResponseData =
+
+    override suspend operator fun invoke(query: String?, page: Int, size : Int): ResponseData =
         withContext(ioDispatcher) {
-            api.getImages(query, page)
+            api.getImages(query, page, size)
         }
 }

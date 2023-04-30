@@ -9,8 +9,8 @@ import com.alexnechet.local.images.model.ImageDb
 
 @Dao
 interface ImagesDao {
-    @Query("SELECT * FROM images ORDER BY id")
-    fun getImages(): PagingSource<Int, ImageDb>?
+    @Query("SELECT * FROM images ORDER BY position")
+    fun getImages(): PagingSource<Int, ImageDb>
 
     @Query("SELECT * FROM images WHERE id = :id LIMIT 1")
     suspend fun getImage(id: Long): ImageDb?
