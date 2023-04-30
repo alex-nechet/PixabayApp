@@ -6,7 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexnechet.domain.images.model.BasicImageInfo
-import com.alexnechet.domain.images.model.Image
 import com.alexnechet.feature.common.loadImage
 import com.alexnechet.feature.images.R
 import com.alexnechet.feature.images.databinding.ItemListBinding
@@ -51,7 +50,7 @@ class ImagesListAdapter(
         }
 
         override fun areContentsTheSame(oldItem: BasicImageInfo, newItem: BasicImageInfo): Boolean {
-            return oldItem == newItem
+            return  oldItem == newItem
         }
     }
 }

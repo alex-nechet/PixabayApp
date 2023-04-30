@@ -13,7 +13,6 @@ import com.alexnechet.repository.images.mappers.toDb
 
 
 private const val START_PAGE_INDEX = 1
-const val PAGE_SIZE = 20
 
 @ExperimentalPagingApi
 internal class ImagesRemoteMediator(
@@ -22,20 +21,19 @@ internal class ImagesRemoteMediator(
     private val imagesLocal: ImagesLocalDataSource,
     private val imageKeysLocal: RemoteKeysLocalDataSource
 ) : RemoteMediator<Int, ImageDb>() {
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, ImageDb>
     ): MediatorResult {
 
+
         val page = when (loadType) {
             LoadType.REFRESH -> {
-                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1) ?: START_PAGE_INDEX
+                START_PAGE_INDEX
             }
             LoadType.PREPEND -> {
-                val remoteKeys = getRemoteKeyForFirstItem(state)
-                remoteKeys?.prevKey
-                    ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
+                return MediatorResult.Success(endOfPaginationReached = true)
             }
 
             LoadType.APPEND -> {
@@ -46,10 +44,11 @@ internal class ImagesRemoteMediator(
         }
 
         return try {
-            val apiResponse = remote(query, page, state.config.pageSize)
+            val apiResponse = remote(query = query, page = page, size = state.config.pageSize)
 
             val images = apiResponse.imageList.map { it.toDb() }
             val endOfPaginationReached = images.isEmpty()
+
 
             if (loadType == LoadType.REFRESH) {
                 imageKeysLocal.clearRemoteKeys()
@@ -57,10 +56,10 @@ internal class ImagesRemoteMediator(
             }
 
             val prevKey = if (page == START_PAGE_INDEX) null else page - 1
-            val nextKey = if (endOfPaginationReached) null else page + 1
+             val nextKey = if (endOfPaginationReached) null else page + 1
 
             val keys = images.map {
-                RemoteKeys(imageId = it.id, prevKey = prevKey, nextKey = nextKey)
+                RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
             }
 
             imageKeysLocal.insertAll(keys)

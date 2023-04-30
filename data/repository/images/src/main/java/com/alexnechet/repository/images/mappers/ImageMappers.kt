@@ -30,12 +30,14 @@ fun ImageDb.toImage() = Image(
     collections = collections ?: 0,
     likes = likes ?: 0,
     userName = userName.orEmpty(),
-    userImageUrl = userImageUrl.orEmpty()
+    userImageUrl = userImageUrl.orEmpty(),
+    dbId = databaseId
 )
 
 fun Image.toBasicImageInfo() = BasicImageInfo(
     id = id,
     userName = userName,
     previewUrl = previewUrl,
-    userImageUrl = userImageUrl
+    userImageUrl = userImageUrl,
+    dbId = dbId
 )

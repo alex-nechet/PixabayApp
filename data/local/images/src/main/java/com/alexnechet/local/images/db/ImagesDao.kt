@@ -9,7 +9,7 @@ import com.alexnechet.local.images.model.ImageDb
 
 @Dao
 interface ImagesDao {
-    @Query("SELECT * FROM images ORDER BY position")
+    @Query("SELECT * FROM images ORDER BY databaseId")
     fun getImages(): PagingSource<Int, ImageDb>
 
     @Query("SELECT * FROM images WHERE id = :id LIMIT 1")

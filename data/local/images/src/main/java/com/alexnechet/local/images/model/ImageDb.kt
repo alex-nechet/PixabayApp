@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "images")
 data class ImageDb(
     @PrimaryKey(autoGenerate = true)
-    val position: Long = 0,
+    val databaseId : Long = 0,
     val id: Long,
     val tags: String? = null,
     val previewUrl: String? = null,
@@ -18,4 +18,4 @@ data class ImageDb(
     val likes: Int? = null,
     val userName: String? = null,
     val userImageUrl: String? = null
-    )
+)

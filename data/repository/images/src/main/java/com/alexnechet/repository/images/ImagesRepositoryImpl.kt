@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 
+private const val PAGE_SIZE = 20
 
 class ImagesRepositoryImpl(
     private val remote: ImagesRemoteDataSource,
@@ -28,18 +29,28 @@ class ImagesRepositoryImpl(
 
     @OptIn(ExperimentalPagingApi::class)
     override fun getImages(query: String): Flow<PagingData<Image>> {
+        val sourceFactory = {
+            imagesLocalDataSource.getAllImages()
+                ?: throw IllegalStateException("Database is not initialized")
+        }
+
         val pageConfig = PagingConfig(
             pageSize = PAGE_SIZE,
-            enablePlaceholders = false,
-            maxSize = PAGE_SIZE * 3
+            enablePlaceholders = false
+        )
+
+        val remoteMediator = ImagesRemoteMediator(
+            query = query,
+            remote = remote,
+            imagesLocal = imagesLocalDataSource,
+            imageKeysLocal = keysLocalDataSource
         )
 
         return Pager(
             config = pageConfig,
-            remoteMediator = ImagesRemoteMediator(query, remote, imagesLocalDataSource, keysLocalDataSource)
-        ) {
-            imagesLocalDataSource.getAllImages()
-        }.flow.map { pd ->
+            remoteMediator = remoteMediator,
+            pagingSourceFactory = sourceFactory
+        ).flow.map { pd ->
             pd.map { it.toImage() }
         }.catch {
             it.printStackTrace()

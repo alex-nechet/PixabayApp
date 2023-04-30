@@ -7,5 +7,6 @@ fun Image.toBasicImageInfo() = BasicImageInfo(
     id = id,
     userName = userName,
     previewUrl = previewUrl,
-    userImageUrl = userImageUrl
+    userImageUrl = userImageUrl,
+    dbId = dbId,
 )
