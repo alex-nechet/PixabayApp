@@ -11,8 +11,6 @@
 
 
 **Remarks:**
-- features modules are not done because it'd require additional manipulations with resources 
-(e.g. splitting or making a common module) - would be more time consuming
 - obfuscation (proguard files) is not done in favor of time management
 - No Compose - because xml approach is more time effective in this case
 - Koin -> Hilt - because of timing and because koin is kotlin based (might be important for KMM)
