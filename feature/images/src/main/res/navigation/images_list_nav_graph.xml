@@ -2,19 +2,47 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/imagesListFragment"
-    android:id="@+id/images_list_nav_graph">
+    android:id="@+id/images_list_nav_graph"
+    app:startDestination="@id/imagesListFragment">
+
+
+    <action
+        android:id="@+id/images_list_with_params"
+        app:destination="@id/imagesListFragment"
+        app:launchSingleTop="true" />
 
     <fragment
         android:id="@+id/imagesListFragment"
         android:name="com.alexnechet.feature.images.list.ImageListFragment"
         android:label="imagesListFragment"
-        tools:layout="@layout/fragment_images_list" />
+        tools:layout="@layout/fragment_images_list">
 
-        <fragment
-            android:id="@+id/imageDetailsFragment"
-            android:name="com.alexnechet.feature.images.details.ImageDetailsFragment"
-            android:label="imagesDetailsFragment"
-            tools:layout="@layout/fragment_images_list" />
+        <argument
+            android:name="@+id/initial_search"
+            android:defaultValue=""
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_imagesListFragment_to_imageDetailsFragment"
+            app:destination="@id/imageDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_in" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageDetailsFragment"
+        android:name="com.alexnechet.feature.images.details.ImageDetailsFragment"
+        android:label="imagesDetailsFragment"
+        tools:layout="@layout/fragment_images_list">
+
+        <argument
+            android:name="@+id/imageId"
+            app:argType="long"
+            android:defaultValue="0L"/>
+
+    </fragment>
 
 </navigation>

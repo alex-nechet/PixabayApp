@@ -33,11 +33,3 @@ fun ImageDb.toImage() = Image(
     userImageUrl = userImageUrl.orEmpty(),
     dbId = databaseId
 )
-
-fun Image.toBasicImageInfo() = BasicImageInfo(
-    id = id,
-    userName = userName,
-    previewUrl = previewUrl,
-    userImageUrl = userImageUrl,
-    dbId = dbId
-)

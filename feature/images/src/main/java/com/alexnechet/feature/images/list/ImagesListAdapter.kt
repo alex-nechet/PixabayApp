@@ -11,7 +11,7 @@ import com.alexnechet.feature.images.R
 import com.alexnechet.feature.images.databinding.ItemListBinding
 
 class ImagesListAdapter(
-    private val action: (info: BasicImageInfo) -> Unit
+    private val action: (imageId: Long) -> Unit
 ) : PagingDataAdapter<BasicImageInfo, ImagesListAdapter.UserViewHolder>(ImagesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -30,14 +30,18 @@ class ImagesListAdapter(
         private val binding: ItemListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(image: BasicImageInfo, action: (info: BasicImageInfo) -> Unit) {
-            binding.title.text = image.userName
-            binding.userImage.loadImage(binding.userImage.context, image.userImageUrl, true)
-            binding.postImage.loadImage(binding.postImage.context, image.previewUrl)
+        fun bind(image: BasicImageInfo, action: (imageId: Long) -> Unit) {
+            with(binding) {
+                title.text = image.userName
+                userImage.loadImage(userImage.context, image.userImageUrl, true)
+                postImage.loadImage(postImage.context, image.previewUrl)
+                tagsList.text = image.tags
+            }
+
             itemView.setOnClickListener {
                 // Triggers click upwards to the adapter on click
                 if (layoutPosition != RecyclerView.NO_POSITION) {
-
+                    action.invoke(image.id)
                 }
             }
 
@@ -50,7 +54,7 @@ class ImagesListAdapter(
         }
 
         override fun areContentsTheSame(oldItem: BasicImageInfo, newItem: BasicImageInfo): Boolean {
-            return  oldItem == newItem
+            return oldItem == newItem
         }
     }
 }

@@ -1,6 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/user_image"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
+            android:layout_margin="@dimen/space_8"
+            android:adjustViewBounds="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:padding="@dimen/space_8"
+            app:layout_constraintBottom_toBottomOf="@+id/user_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/user_image"
+            app:layout_constraintTop_toTopOf="@+id/user_image"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tags_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_8"
+            android:text="@string/tags_label"
+            android:textColor="@color/material_dynamic_primary0"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_image" />
+
+        <TextView
+            android:id="@+id/tags_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/material_dynamic_primary30"
+            app:layout_constraintBottom_toBottomOf="@id/tags_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tags_label"
+            app:layout_constraintTop_toBottomOf="@id/user_image"
+            tools:text="cat, dog" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/full_image_min_height"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tags_label" />
+
+
+        <ProgressBar
+            android:id="@+id/image_loading_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/image"
+            app:layout_constraintEnd_toEndOf="@id/image"
+            app:layout_constraintStart_toStartOf="@id/image"
+            app:layout_constraintTop_toTopOf="@id/image" />
+
+        <TextView
+            android:id="@+id/likes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/space_16"
+            android:textColor="@color/material_dynamic_primary20"
+            app:drawableStartCompat="@drawable/baseline_recommend_24"
+            app:drawableTint="@color/material_dynamic_primary20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintWidth_percent="0.33"
+            tools:text="100" />
+
+        <TextView
+            android:id="@+id/downloads"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/space_16"
+            android:textColor="@color/material_dynamic_primary20"
+            app:drawableStartCompat="@drawable/baseline_download_for_offline_24"
+            app:drawableTint="@color/material_dynamic_primary20"
+            app:layout_constraintEnd_toStartOf="@id/comments"
+            app:layout_constraintStart_toEndOf="@id/likes"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/comments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/space_16"
+            android:textColor="@color/material_dynamic_primary20"
+            app:drawableStartCompat="@drawable/baseline_comment_24"
+            app:drawableTint="@color/material_dynamic_primary20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintWidth_percent="0.33"
+            tools:text="9999" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/error_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="@dimen/space_16"
+        android:visibility="gone"
+        tools:text="Error"
+        tools:visibility="visible" />
+</FrameLayout>

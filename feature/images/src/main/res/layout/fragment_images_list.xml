@@ -3,26 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/space_16">
+    android:background="@color/background_color">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/card_background_color"
+        app:elevation="@dimen/space_8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/search_edittext"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_inpt_layout"
             android:layout_width="match_parent"
-            android:hint="@string/search_hint"
-            android:drawableStart="@drawable/baseline_search_24"
-            android:drawableTint="@color/material_dynamic_primary40"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_16">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawableTint="@color/material_dynamic_primary40"
+                android:hint="@string/search_hint" />
 
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"

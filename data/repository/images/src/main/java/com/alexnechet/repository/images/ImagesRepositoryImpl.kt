@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 private const val PAGE_SIZE = 20
 
@@ -31,7 +32,6 @@ class ImagesRepositoryImpl(
     override fun getImages(query: String): Flow<PagingData<Image>> {
         val sourceFactory = {
             imagesLocalDataSource.getAllImages()
-                ?: throw IllegalStateException("Database is not initialized")
         }
 
         val pageConfig = PagingConfig(
@@ -58,8 +58,16 @@ class ImagesRepositoryImpl(
     }
 
 
-    override fun getImageById(id: Long): Result<Image> {
-        TODO("Not yet implemented")
+    override suspend fun getImageById(id: Long): Result<Image> = withContext(ioDispatcher) {
+        return@withContext try {
+            val image = imagesLocalDataSource.getImage(id)?.toImage()
+                ?: return@withContext Result.failure(
+                    IllegalStateException("Image with id: $id not found or db is corrupted")
+                )
+            Result.success(image)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
 }

@@ -2,4 +2,5 @@
     <string name="search_hint">Search</string>
     <string name="retry">Retry</string>
     <string name="default_search_word">Fruits</string>
+    <string name="tags_label">Tags:</string>
 </resources>

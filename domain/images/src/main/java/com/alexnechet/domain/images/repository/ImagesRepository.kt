@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface ImagesRepository {
     fun getImages(query: String): Flow<PagingData<Image>>
 
-    fun getImageById(id: Long): Result<Image>
+    suspend fun getImageById(id: Long): Result<Image>
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    app:cardBackgroundColor="@color/material_dynamic_secondary100"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/space_4"
     app:cardCornerRadius="@dimen/space_4">
 
@@ -12,10 +13,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:layout_margin="@dimen/space_8"
             android:id="@+id/user_image"
             android:layout_width="@dimen/avatar_size"
             android:layout_height="@dimen/avatar_size"
+            android:layout_margin="@dimen/space_8"
             android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,22 +28,45 @@
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:padding="@dimen/space_8"
+            app:layout_constraintBottom_toBottomOf="@+id/user_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/user_image"
             app:layout_constraintTop_toTopOf="@+id/user_image"
-            app:layout_constraintBottom_toBottomOf="@+id/user_image"
             tools:text="Title" />
 
         <ImageView
             android:id="@+id/post_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:paddingTop="@dimen/space_8"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/space_8"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="W,9:16"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/user_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_image"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/tags_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/space_8"
+            android:text="@string/tags_label"
+            android:textColor="@color/material_dynamic_primary0"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/post_image" />
+
+        <TextView
+            android:id="@+id/tags_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/material_dynamic_primary30"
+            app:layout_constraintBottom_toBottomOf="@id/tags_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tags_label"
+            app:layout_constraintTop_toBottomOf="@id/post_image"
+            tools:text="cat, dog" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
