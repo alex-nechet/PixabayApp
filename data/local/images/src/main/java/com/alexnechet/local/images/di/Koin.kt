@@ -19,10 +19,10 @@ val imagesLocalDataSource = module {
     }
 
     single<ImagesLocalDataSource> {
-        ImagesLocalDataSourceImpl(get<ImagesDatabase>().imagesDao())
+        ImagesLocalDataSourceImpl(dao= get<ImagesDatabase>().imagesDao())
     }
 
     single<RemoteKeysLocalDataSource> {
-        RemoteKeysLocalDataSourceImpl(get<ImagesDatabase>().remoteKeysDao())
+        RemoteKeysLocalDataSourceImpl(dao = get<ImagesDatabase>().remoteKeysDao())
     }
 }

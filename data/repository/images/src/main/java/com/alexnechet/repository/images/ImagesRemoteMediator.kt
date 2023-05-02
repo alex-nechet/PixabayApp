@@ -29,13 +29,8 @@ internal class ImagesRemoteMediator(
 
 
         val page = when (loadType) {
-            LoadType.REFRESH -> {
-                START_PAGE_INDEX
-            }
-            LoadType.PREPEND -> {
-                return MediatorResult.Success(endOfPaginationReached = true)
-            }
-
+            LoadType.REFRESH -> START_PAGE_INDEX
+            LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
             LoadType.APPEND -> {
                 val remoteKeys = getRemoteKeyForLastItem(state)
                 remoteKeys?.nextKey
@@ -56,7 +51,7 @@ internal class ImagesRemoteMediator(
             }
 
             val prevKey = if (page == START_PAGE_INDEX) null else page - 1
-             val nextKey = if (endOfPaginationReached) null else page + 1
+            val nextKey = if (endOfPaginationReached) null else page + 1
 
             val keys = images.map {
                 RemoteKeys(id = it.id, prevKey = prevKey, nextKey = nextKey)
@@ -74,21 +69,6 @@ internal class ImagesRemoteMediator(
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, ImageDb>): RemoteKeys? {
         val lastItem = state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
         return lastItem?.let { image -> imageKeysLocal.remoteKeysImageId(image.id) }
-    }
-
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, ImageDb>): RemoteKeys? {
-        val firstItem = state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-        return firstItem?.let { image -> imageKeysLocal.remoteKeysImageId(image.id) }
-    }
-
-    private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, ImageDb>
-    ): RemoteKeys? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.id?.let { imageId ->
-                imageKeysLocal.remoteKeysImageId(imageId)
-            }
-        }
     }
 }
 

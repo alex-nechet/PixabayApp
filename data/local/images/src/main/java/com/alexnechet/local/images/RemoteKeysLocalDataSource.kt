@@ -2,6 +2,9 @@ package com.alexnechet.local.images
 
 import com.alexnechet.local.images.db.RemoteKeysDao
 import com.alexnechet.local.images.model.RemoteKeys
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface RemoteKeysLocalDataSource {
     suspend fun insertAll(remoteKey: List<RemoteKeys>)
@@ -10,12 +13,18 @@ interface RemoteKeysLocalDataSource {
 }
 
 class RemoteKeysLocalDataSourceImpl(
-    private val dao: RemoteKeysDao
+    private val dao: RemoteKeysDao,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : RemoteKeysLocalDataSource {
-    override suspend fun insertAll(remoteKey: List<RemoteKeys>) = dao.insertAll(remoteKey)
+    override suspend fun insertAll(remoteKey: List<RemoteKeys>) = withContext(dispatcher) {
+        dao.insertAll(remoteKey)
+    }
 
-    override suspend fun remoteKeysImageId(imageId: Long): RemoteKeys? =
+    override suspend fun remoteKeysImageId(imageId: Long): RemoteKeys? = withContext(dispatcher) {
         dao.remoteKeysRepoId(imageId)
+    }
 
-    override suspend fun clearRemoteKeys() = dao.clearRemoteKeys()
+    override suspend fun clearRemoteKeys() = withContext(dispatcher) {
+        dao.clearRemoteKeys()
+    }
 }

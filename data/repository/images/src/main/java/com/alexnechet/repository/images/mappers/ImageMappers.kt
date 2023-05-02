@@ -30,6 +30,5 @@ fun ImageDb.toImage() = Image(
     collections = collections ?: 0,
     likes = likes ?: 0,
     userName = userName.orEmpty(),
-    userImageUrl = userImageUrl.orEmpty(),
-    dbId = databaseId
+    userImageUrl = userImageUrl.orEmpty()
 )

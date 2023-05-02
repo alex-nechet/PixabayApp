@@ -1,7 +1,6 @@
 package com.alexnechet.domain.images.model
 
 data class Image(
-    val dbId: Long,
     val id: Long,
     val tags: String,
     val previewUrl: String,
