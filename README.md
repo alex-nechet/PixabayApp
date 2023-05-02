@@ -20,4 +20,5 @@
 - Its possible to make physical resize of images according to data from API (for example for large
   image this parameter  "imageHeight":3240" could be recalculated and scaled to real device
   screen size)
+- Added sample unit tests for usecases and viewmodel
 
